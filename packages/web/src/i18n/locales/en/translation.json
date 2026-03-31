@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "title": "TalentLens",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainLabel": "Main navigation",
+    "mobileMenuLabel": "Mobile navigation menu",
+    "newAnalysis": "New analysis"
+  },
+  "theme": {
+    "toggleLight": "Switch to light mode",
+    "toggleDark": "Switch to dark mode"
+  },
+  "upload": {
+    "title": "Analyze a candidate profile",
+    "subtitle": "Upload the candidate's documents to get an AI summary and start chatting",
+    "cv": {
+      "label": "Resume",
+      "hint": "Required · PDF, Word or TXT",
+      "drop": "Drop resume here",
+      "browse": "Browse"
+    },
+    "letter": {
+      "label": "Cover Letter",
+      "hint": "Optional · PDF, Word or TXT",
+      "drop": "Drop cover letter here",
+      "browse": "Browse"
+    },
+    "linkedin": {
+      "label": "LinkedIn Profile (PDF)",
+      "hint": "Optional · PDF only",
+      "drop": "Drop LinkedIn PDF here",
+      "browse": "Browse"
+    },
+    "optional": "Optional",
+    "fileSelected": "File selected",
+    "remove": "Remove file",
+    "analyze": "Analyze Profile",
+    "analyzing": "Analyzing…",
+    "cvRequired": "Resume is required to start the analysis"
+  },
+  "analyse": {
+    "title": "Profile Analysis",
+    "loading": "Extracting text and detecting information…",
+    "links": "Detected Links",
+    "noLinks": "No links detected in the documents"
+  },
+  "chat": {
+    "title": "Ask about the profile",
+    "subtitle": "Ask questions about the candidate's experience, skills, or personality",
+    "placeholder": "E.g. What is your React experience?",
+    "send": "Send",
+    "sending": "Sending…",
+    "seeSummary": "View Summary →",
+    "generatingSummary": "Generating summary…",
+    "assistant": "Assistant",
+    "you": "You",
+    "greeting": "Hello! Feel free to ask me anything about my background, skills or experience — I'm here to answer your questions."
+  },
+  "summary": {
+    "title": "Candidate Summary",
+    "location": "Location",
+    "education": "Education",
+    "skills": "Skills",
+    "aiInsight": "AI Analysis — Recruiter Perspective",
+    "backToChat": "Back to chat",
+    "newAnalysis": "New Analysis",
+    "noData": "No summary available",
+    "level": {
+      "1": "Beginner",
+      "2": "Intermediate",
+      "3": "Expert"
+    },
+    "categories": {
+      "Frontend": "Frontend",
+      "Backend": "Backend",
+      "Outils": "Tools",
+      "Tools": "Tools",
+      "Soft Skills": "Soft Skills",
+      "Langage": "Languages",
+      "Language": "Languages",
+      "Languages": "Languages"
+    }
+  },
+  "steps": {
+    "upload": "Upload",
+    "analyse": "Analyse",
+    "chat": "Chat"
+  },
+  "errors": {
+    "upload": "Error uploading files",
+    "chat": "Error sending message",
+    "summary": "Error generating summary",
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you're looking for doesn't exist.",
+      "back": "Back to home"
+    },
+    "generic": {
+      "title": "Something went wrong",
+      "description": "Please try again.",
+      "back": "Back to home"
+    }
+  }
+}

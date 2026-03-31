@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "title": "TalentLens",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "mainLabel": "Navigation principale",
+    "mobileMenuLabel": "Menu de navigation mobile",
+    "newAnalysis": "Nouvelle analyse"
+  },
+  "theme": {
+    "toggleLight": "Passer en mode clair",
+    "toggleDark": "Passer en mode sombre"
+  },
+  "upload": {
+    "title": "Analysez un profil candidat",
+    "subtitle": "Importez les documents du candidat pour obtenir une synthèse IA et démarrer le chat",
+    "cv": {
+      "label": "CV",
+      "hint": "Obligatoire · PDF, Word ou TXT",
+      "drop": "Glissez le CV ici",
+      "browse": "Parcourir"
+    },
+    "letter": {
+      "label": "Lettre de motivation",
+      "hint": "Optionnel · PDF, Word ou TXT",
+      "drop": "Glissez la lettre ici",
+      "browse": "Parcourir"
+    },
+    "linkedin": {
+      "label": "Profil LinkedIn (PDF)",
+      "hint": "Optionnel · PDF uniquement",
+      "drop": "Glissez le PDF LinkedIn ici",
+      "browse": "Parcourir"
+    },
+    "optional": "Optionnel",
+    "fileSelected": "Fichier sélectionné",
+    "remove": "Retirer le fichier",
+    "analyze": "Analyser le profil",
+    "analyzing": "Analyse en cours…",
+    "cvRequired": "Le CV est requis pour démarrer l'analyse"
+  },
+  "analyse": {
+    "title": "Analyse du profil",
+    "loading": "Extraction du texte et détection des informations…",
+    "links": "Liens détectés",
+    "noLinks": "Aucun lien détecté dans les documents"
+  },
+  "chat": {
+    "title": "Interrogez le profil",
+    "subtitle": "Posez vos questions sur l'expérience, les compétences ou la personnalité du candidat",
+    "placeholder": "Ex : Quelles sont vos expériences en React ?",
+    "send": "Envoyer",
+    "sending": "Envoi…",
+    "seeSummary": "Voir la synthèse →",
+    "generatingSummary": "Génération de la synthèse…",
+    "assistant": "Assistant",
+    "you": "Vous",
+    "greeting": "Bonjour ! N'hésitez pas à m'interroger sur mon parcours, mes compétences ou mes expériences — je suis là pour répondre à vos questions."
+  },
+  "summary": {
+    "title": "Synthèse du candidat",
+    "location": "Localisation",
+    "education": "Formation",
+    "skills": "Compétences",
+    "aiInsight": "Analyse IA — Point de vue recruteur",
+    "backToChat": "Retour au chat",
+    "newAnalysis": "Nouvelle analyse",
+    "noData": "Aucune synthèse disponible",
+    "level": {
+      "1": "Débutant",
+      "2": "Intermédiaire",
+      "3": "Expert"
+    },
+    "categories": {
+      "Frontend": "Frontend",
+      "Backend": "Backend",
+      "Outils": "Outils",
+      "Tools": "Outils",
+      "Soft Skills": "Soft Skills",
+      "Langage": "Langage",
+      "Language": "Langage",
+      "Languages": "Langage"
+    }
+  },
+  "steps": {
+    "upload": "Upload",
+    "analyse": "Analyse",
+    "chat": "Chat"
+  },
+  "errors": {
+    "upload": "Erreur lors de l'upload des fichiers",
+    "chat": "Erreur lors de l'envoi du message",
+    "summary": "Erreur lors de la génération de la synthèse",
+    "notFound": {
+      "title": "Page introuvable",
+      "description": "La page que vous cherchez n'existe pas.",
+      "back": "Retour à l'accueil"
+    },
+    "generic": {
+      "title": "Une erreur est survenue",
+      "description": "Veuillez réessayer.",
+      "back": "Retour à l'accueil"
+    }
+  }
+}

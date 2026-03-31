@@ -1,0 +1,46 @@
+# ─── Dependencies ────────────────────────────────────────────────────────────
+node_modules/
+
+# ─── Build outputs ───────────────────────────────────────────────────────────
+dist/
+build/
+
+# ─── TypeScript ──────────────────────────────────────────────────────────────
+*.tsbuildinfo
+
+# ─── Test coverage ───────────────────────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─── Environment variables ───────────────────────────────────────────────────
+# .env.example files are committed — they are templates, not secrets
+.env
+.env.local
+.env.*.local
+.env.test
+.env.production
+
+# ─── Local override files (Vite) ─────────────────────────────────────────────
+*.local
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# ─── OS / Editor ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+
+# ─── Playwright MCP output ───────────────────────────────────────────────────
+.playwright-mcp/
+
+# ─── Brainstorming / Visual companion ────────────────────────────────────────
+.superpowers/
+
+# ─── Local tooling / Claude ──────────────────────────────────────────────────
+.claude/
+
+# ─── Local docs / scratchpad (not for the repo) ──────────────────────────────
+docs/

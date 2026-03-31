@@ -1,0 +1,15 @@
+{
+  "name": "talent-lens-monorepo",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --names \"API,WEB\" --prefix-colors \"cyan,magenta\" \"pnpm --filter ./packages/api run dev:package\" \"pnpm --filter ./packages/web run dev:package\"",
+    "build": "pnpm --filter ./packages/api run build && pnpm --filter ./packages/web run build",
+    "lint": "pnpm --recursive run lint",
+    "test": "pnpm --recursive run test",
+    "generate:api": "pnpm --filter ./packages/api run openapi:export && pnpm --filter ./packages/web run generate:api"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.10",
+    "concurrently": "9.2.1"
+  }
+}
