@@ -3,6 +3,7 @@ import type { ChatMessage, UploadResponse } from '@/api/model/upload';
 import type { SummaryResponse } from '@/api/model/summary';
 
 export type WizardStep = 1 | 2 | 3;
+export type StoredMessage = ChatMessage & { id: string };
 
 interface TalentState {
   step: WizardStep;
@@ -11,7 +12,7 @@ interface TalentState {
   uploadResult: UploadResponse | null;
   setUploadResult: (r: UploadResponse) => void;
 
-  chatHistory: ChatMessage[];
+  chatHistory: StoredMessage[];
   addChatMessage: (msg: ChatMessage) => void;
 
   summaryResult: SummaryResponse | null;
@@ -23,7 +24,7 @@ interface TalentState {
 const initialState = {
   step: 1 as WizardStep,
   uploadResult: null,
-  chatHistory: [],
+  chatHistory: [] as StoredMessage[],
   summaryResult: null,
 };
 
@@ -32,7 +33,7 @@ export const useTalentStore = create<TalentState>()((set) => ({
   setStep: (step) => set({ step }),
   setUploadResult: (uploadResult) => set({ uploadResult }),
   addChatMessage: (msg) =>
-    set((state) => ({ chatHistory: [...state.chatHistory, msg] })),
+    set((state) => ({ chatHistory: [...state.chatHistory, { ...msg, id: crypto.randomUUID() }] })),
   setSummaryResult: (summaryResult) => set({ summaryResult }),
   reset: () => set(initialState),
 }));

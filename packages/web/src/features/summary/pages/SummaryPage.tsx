@@ -14,7 +14,7 @@ export default function SummaryPage() {
 
   // Redirect if no data
   useEffect(() => {
-    if (!summaryResult) void navigate('/');
+    if (!summaryResult) navigate('/');
   }, [summaryResult, navigate]);
 
   if (!summaryResult) return null;
@@ -28,12 +28,12 @@ export default function SummaryPage() {
 
   const handleBackToChat = () => {
     setStep(3);
-    void navigate('/');
+    navigate('/');
   };
 
   const handleNewAnalysis = () => {
     reset();
-    void navigate('/');
+    navigate('/');
   };
 
   return (

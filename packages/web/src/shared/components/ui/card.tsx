@@ -14,8 +14,8 @@ export function CardHeader({ className, ...props }: ComponentPropsWithRef<'div'>
   return <div className={cn('flex flex-col gap-1.5 p-6', className)} {...props} />;
 }
 
-export function CardTitle({ className, ...props }: ComponentPropsWithRef<'h3'>) {
-  return <h3 className={cn('text-lg font-semibold leading-none', className)} {...props} />;
+export function CardTitle({ className, children, ...props }: ComponentPropsWithRef<'h3'>) {
+  return <h3 className={cn('text-lg font-semibold leading-none', className)} {...props}>{children}</h3>;
 }
 
 export function CardContent({ className, ...props }: ComponentPropsWithRef<'div'>) {

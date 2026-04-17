@@ -54,7 +54,7 @@ describe('useTalentStore', () => {
     it('appends a user message', () => {
       useTalentStore.getState().addChatMessage({ role: 'user', content: 'Hello' });
       expect(useTalentStore.getState().chatHistory).toHaveLength(1);
-      expect(useTalentStore.getState().chatHistory[0]).toEqual({ role: 'user', content: 'Hello' });
+      expect(useTalentStore.getState().chatHistory[0]).toMatchObject({ role: 'user', content: 'Hello' });
     });
 
     it('appends multiple messages in order', () => {

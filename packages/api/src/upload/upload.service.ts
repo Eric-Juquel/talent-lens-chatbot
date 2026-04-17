@@ -110,7 +110,24 @@ export class UploadService {
   }
 
   private extractCandidateName(text: string): string {
-    const CV_SECTION_KEYWORDS = /^(atouts?|formation|expériences?|compétences?|langues?|loisirs?|références?|profil|objectif|coordonnées?|contact|éducation|certifications?|projets?|skills?|experience|education|summary|about|profile|hobbies|interests|languages|curriculum vitae|cv|responsive|design|développeur|developer|engineer|ingénieur|consultant|manager|analyst|analyste|chef|lead|senior|junior|stage|intern|freelance|fullstack|full.stack|frontend|backend|devops|mobile|web|data|cloud|agile|scrum|digital|informatique|informaticien)$/i;
+    const CV_SECTION_KEYWORDS = new Set([
+      'atout', 'atouts', 'formation', 'expérience', 'expériences', 'compétence', 'compétences',
+      'langue', 'langues', 'loisir', 'loisirs', 'référence', 'références', 'profil', 'objectif',
+      'coordonnée', 'coordonnées', 'contact', 'éducation', 'certification', 'certifications',
+      'projet', 'projets', 'skill', 'skills', 'experience', 'education', 'summary', 'about',
+      'profile', 'hobbies', 'interests', 'languages', 'curriculum vitae', 'cv', 'responsive',
+      'design', 'développeur', 'developer', 'engineer', 'ingénieur', 'consultant', 'manager',
+      'analyst', 'analyste', 'chef', 'lead', 'senior', 'junior', 'stage', 'intern', 'freelance',
+      'fullstack', 'full-stack', 'full_stack', 'frontend', 'backend', 'devops', 'mobile', 'web',
+      'data', 'cloud', 'agile', 'scrum', 'digital', 'informatique', 'informaticien',
+    ]);
+
+    const JOB_TITLE_KEYWORDS = new Set([
+      'développeur', 'developer', 'engineer', 'ingénieur', 'consultant', 'manager', 'designer',
+      'analyst', 'analyste', 'directeur', 'responsable', 'chef', 'lead', 'senior', 'junior',
+      'stage', 'intern', 'freelance', 'fullstack', 'full-stack', 'full_stack', 'frontend',
+      'backend', 'devops', 'mobile', 'web', 'data', 'cloud', 'agile', 'scrum', 'responsive',
+    ]);
 
     const lines = text
       .split('\n')
@@ -122,9 +139,10 @@ export class UploadService {
       // Skip obvious non-names
       if (line.length > 50) continue;
       if (/[@|/\\:,;()\d]/.test(line)) continue;
-      if (CV_SECTION_KEYWORDS.test(line)) continue;
+      if (CV_SECTION_KEYWORDS.has(line.toLowerCase())) continue;
       // Skip lines containing job-title keywords
-      if (/\b(développeur|developer|engineer|ingénieur|consultant|manager|designer|analyst|analyste|directeur|responsable|chef|lead|senior|junior|stage|intern|freelance|fullstack|full.stack|frontend|backend|devops|mobile|web|data|cloud|agile|scrum|responsive)\b/i.test(line)) continue;
+      const lineWords = line.toLowerCase().split(/\s+/);
+      if (lineWords.some((w) => JOB_TITLE_KEYWORDS.has(w))) continue;
 
       // A name looks like 2-4 words, each starting with a capital letter
       const words = line.split(/\s+/);

@@ -1,7 +1,6 @@
 export function PageLoader() {
   return (
-    <div
-      role='status'
+    <output
       aria-label='Loading page'
       className='flex min-h-[50vh] items-center justify-center'
     >
@@ -9,6 +8,6 @@ export function PageLoader() {
         className='h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent'
         aria-hidden='true'
       />
-    </div>
+    </output>
   );
 }
