@@ -17,8 +17,8 @@ coverage/
 .env
 .env.local
 .env.*.local
-.env.test
 .env.production
+# .env.test is intentionally NOT excluded — safe to commit (contains local URLs, no secrets)
 
 # ─── Local override files (Vite) ─────────────────────────────────────────────
 *.local
