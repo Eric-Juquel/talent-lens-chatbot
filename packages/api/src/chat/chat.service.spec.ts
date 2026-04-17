@@ -270,7 +270,7 @@ describe('ChatService', () => {
     });
 
     it('passes baseURL to OpenAI when OPENAI_BASE_URL is set', async () => {
-      const OpenAI = (await import('openai')).default as ReturnType<typeof vi.fn>;
+      const OpenAI = (await import('openai')).default as unknown as ReturnType<typeof vi.fn>;
       mockConfig.get.mockImplementation((key: string, def?: unknown) => {
         if (key === 'OPENAI_BASE_URL') return 'https://custom.api/v1';
         if (key === 'OPENAI_MODEL') return 'test-model';
@@ -282,7 +282,8 @@ describe('ChatService', () => {
       }).compile();
       module.get(ChatService);
 
-      const constructorCall = OpenAI.mock.calls.at(-1)?.[0] as { baseURL?: string };
+      const calls = OpenAI.mock.calls;
+      const constructorCall = calls[calls.length - 1]?.[0] as { baseURL?: string };
       expect(constructorCall?.baseURL).toBe('https://custom.api/v1');
     });
   });

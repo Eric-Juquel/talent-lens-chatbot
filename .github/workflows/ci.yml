@@ -1,0 +1,167 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+# Node.js 20 actions are deprecated — forces them to run on Node.js 24
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  ci-frontend:
+    name: CI Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm --filter talent-lens-web typecheck
+
+      - name: Lint
+        run: pnpm --filter talent-lens-web lint
+
+      - name: Tests
+        run: pnpm --filter talent-lens-web test:run
+
+      - name: Build
+        run: pnpm --filter talent-lens-web build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL || 'http://localhost:3001' }}
+
+  ci-backend:
+    name: CI Backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm --filter talent-lens-api lint
+
+      - name: Tests
+        run: pnpm --filter talent-lens-api test
+        env:
+          OPENAI_API_KEY: sk-test-placeholder
+
+      - name: Build
+        run: pnpm --filter talent-lens-api build
+
+  security:
+    name: Security Scan (Trivy)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan frontend npm dependencies
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          scan-type: fs
+          scan-ref: ./packages/web
+          format: table
+          severity: CRITICAL,HIGH
+          exit-code: "1"
+          ignore-unfixed: true
+
+      - name: Scan backend npm dependencies
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          scan-type: fs
+          scan-ref: ./packages/api
+          format: table
+          severity: CRITICAL,HIGH
+          exit-code: "1"
+          ignore-unfixed: true
+
+      - name: Build frontend Docker image
+        run: docker build -t talent-lens-web:${{ github.sha }} -f packages/web/Dockerfile .
+        env:
+          VITE_API_BASE_URL: http://localhost:3001
+
+      - name: Scan frontend Docker image
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          scan-type: image
+          image-ref: talent-lens-web:${{ github.sha }}
+          format: table
+          severity: CRITICAL,HIGH
+          exit-code: "1"
+          ignore-unfixed: true
+
+      - name: Build backend Docker image
+        run: docker build -t talent-lens-api:${{ github.sha }} -f packages/api/Dockerfile .
+
+      - name: Scan backend Docker image
+        uses: aquasecurity/trivy-action@0.35.0
+        with:
+          scan-type: image
+          image-ref: talent-lens-api:${{ github.sha }}
+          format: table
+          severity: CRITICAL,HIGH
+          exit-code: "1"
+          ignore-unfixed: true
+
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    needs: [ci-frontend, ci-backend]
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Coverage — frontend
+        run: pnpm --filter talent-lens-web test:coverage
+        continue-on-error: true
+        env:
+          VITE_API_BASE_URL: http://localhost:3001
+
+      - name: Coverage — backend
+        run: pnpm --filter talent-lens-api test:cov
+        continue-on-error: true
+        env:
+          OPENAI_API_KEY: sk-test-placeholder
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v3
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
