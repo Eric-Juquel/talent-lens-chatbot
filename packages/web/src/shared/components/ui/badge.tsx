@@ -21,6 +21,6 @@ export interface BadgeProps
   extends ComponentPropsWithRef<'span'>,
     VariantProps<typeof badgeVariants> {}
 
-export function Badge({ className, variant, ...props }: BadgeProps) {
+export function Badge({ className, variant, ...props }: Readonly<BadgeProps>) {
   return <span className={cn(badgeVariants({ variant, className }))} {...props} />;
 }

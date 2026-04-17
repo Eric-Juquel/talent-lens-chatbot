@@ -32,6 +32,6 @@ export interface ButtonProps
   extends ComponentPropsWithRef<'button'>,
     VariantProps<typeof buttonVariants> {}
 
-export function Button({ className, variant, size, ...props }: ButtonProps) {
+export function Button({ className, variant, size, ...props }: Readonly<ButtonProps>) {
   return <button className={cn(buttonVariants({ variant, size, className }))} {...props} />;
 }
