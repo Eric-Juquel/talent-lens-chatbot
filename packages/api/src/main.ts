@@ -47,7 +47,9 @@ async function bootstrap() {
   await app.listen(port);
 
   const base = `http://localhost:${port}`;
-  console.log(`\n🚀 TalentLens API`);
+  const frontendUrl = corsOrigins[0] ?? 'http://localhost:5173';
+  console.log(`\n🚀 TalentLens`);
+  console.log(`   Frontend  →  ${frontendUrl}`);
   console.log(`   REST API  →  ${base}`);
   if (env !== 'production') {
     console.log(`   Swagger   →  ${base}/docs`);

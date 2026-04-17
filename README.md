@@ -63,8 +63,16 @@ pnpm dev
 | `pnpm dev` | Start API + frontend in parallel (watch mode) |
 | `pnpm build` | Production build (API then frontend) |
 | `pnpm lint` | Lint all packages |
-| `pnpm test` | Run all tests |
+| `pnpm test` | Run all tests (watch mode) |
 | `pnpm generate:api` | Export OpenAPI spec then regenerate Orval client |
+
+### Frontend test scripts (`packages/web`)
+
+| Script | Description |
+|---|---|
+| `pnpm --filter ./packages/web test` | Run frontend tests in watch mode |
+| `pnpm --filter ./packages/web test:run` | Run frontend tests once (CI) |
+| `pnpm --filter ./packages/web test:coverage` | Run tests and generate coverage report (target ≥ 80%) |
 
 ## Project structure
 
