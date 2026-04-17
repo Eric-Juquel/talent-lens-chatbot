@@ -104,7 +104,7 @@ export default function HomePage() {
     } finally {
       setChatLoading(false);
     }
-  }, [message, chatLoading, addChatMessage, chatHistory, buildContext, t]);
+  }, [message, chatLoading, addChatMessage, chatHistory, buildContext, t, i18n.language, summaryResult?.name, uploadResult?.candidateName]);
 
   // Step 3 → Summary
   const handleSeeSummary = useCallback(async () => {

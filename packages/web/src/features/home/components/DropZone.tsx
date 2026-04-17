@@ -4,6 +4,8 @@ import { Upload, X, FileText } from 'lucide-react';
 import { cn } from '@/shared/lib/utils';
 import { Badge } from '@/shared/components/ui/badge';
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB — mirrors server-side multer limit
+
 export const DOCUMENT_MIMETYPES = [
   'application/pdf',
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -40,7 +42,7 @@ export function DropZone({
       e.preventDefault();
       setDragging(false);
       const dropped = e.dataTransfer.files[0];
-      if (dropped && acceptedTypes.includes(dropped.type)) onFile(dropped);
+      if (dropped && acceptedTypes.includes(dropped.type) && dropped.size <= MAX_FILE_SIZE) onFile(dropped);
     },
     [onFile, acceptedTypes],
   );
@@ -48,7 +50,7 @@ export function DropZone({
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const selected = e.target.files?.[0];
-      if (selected) onFile(selected);
+      if (selected && selected.size <= MAX_FILE_SIZE) onFile(selected);
     },
     [onFile],
   );

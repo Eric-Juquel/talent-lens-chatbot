@@ -90,8 +90,7 @@ export class ChatService {
       { role: "user", content: dto.message },
     ];
 
-    let done = false;
-    while (!done) {
+    while (true) {
       const response = await this.openai.chat.completions.create({
         model: this.model,
         messages,
@@ -125,13 +124,10 @@ export class ChatService {
           });
         }
       } else {
-        done = true;
         const content = choice.message.content ?? "";
         return { reply: this.sanitizeReply(content, dto.lang) };
       }
     }
-
-    return { reply: "" };
   }
 
   private buildSystemPrompt(
@@ -139,7 +135,12 @@ export class ChatService {
     lang: string,
     candidateName: string,
   ): string {
-    const name = candidateName || "the candidate";
+    const sanitized = [...candidateName]
+      .filter((c) => { const n = c.codePointAt(0) ?? 0; return n >= 0x20 && n !== 0x7F; })
+      .join('')
+      .slice(0, 100)
+      .trim();
+    const name = sanitized || "the candidate";
     const langLabel = lang.startsWith("fr") ? "French" : "English";
 
     return `You are acting as ${name}. You answer questions on ${name}'s profile page, particularly about their career, background, skills and experience.
@@ -189,9 +190,7 @@ ${context}`;
 
   private handleToolCall(name: string, args: Record<string, unknown>): string {
     if (name === "record_user_details") {
-      this.logger.log(
-        `[Tool] record_user_details: email=${String(args.email)}, name=${String(args.name ?? "N/A")}`,
-      );
+      this.logger.log("[Tool] record_user_details: contact details recorded");
     } else if (name === "record_unknown_question") {
       this.logger.log(
         `[Tool] record_unknown_question: ${String(args.question)}`,

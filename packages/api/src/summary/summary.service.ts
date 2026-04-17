@@ -84,7 +84,7 @@ export class SummaryService {
       const parsed = JSON.parse(repaired) as unknown;
       return summaryResponseSchema.parse(parsed);
     } catch (err) {
-      this.logger.error('Failed to generate summary — ' + String(err));
+      this.logger.error(`Failed to generate summary — ${String(err)}`);
       if (err instanceof Error) this.logger.debug(err.stack ?? '');
       throw new InternalServerErrorException('Failed to generate candidate summary');
     }

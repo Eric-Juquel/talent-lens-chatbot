@@ -47,6 +47,7 @@ export const ChatBubble = memo(function ChatBubble({ message, candidateName }: C
             message.content
           ) : (
             <Markdown
+              skipHtml={true}
               components={{
                 p: ({ children }) => <p className='mb-2 last:mb-0'>{children}</p>,
                 ul: ({ children }) => <ul className='mb-2 list-disc pl-4'>{children}</ul>,

@@ -7,11 +7,11 @@ export const chatMessageSchema = z.object({
 });
 
 export const chatRequestSchema = z.object({
-  message: z.string().min(1),
-  history: z.array(chatMessageSchema).default([]),
-  context: z.string(),
+  message: z.string().min(1).max(2000),
+  history: z.array(chatMessageSchema).max(50).default([]),
+  context: z.string().max(50_000),
   lang: z.enum(['fr', 'en']).default('fr'),
-  candidateName: z.string().default(''),
+  candidateName: z.string().max(100).default(''),
 });
 
 export type ChatMessage = z.infer<typeof chatMessageSchema>;

@@ -43,9 +43,15 @@ export class UploadService {
     };
   }
 
+  private sanitizeFilename(name: string): string {
+    return [...name]
+      .map((c) => { const n = c.codePointAt(0) ?? 0; return (n >= 0x20 && n !== 0x7F) ? c : '_'; })
+      .join('');
+  }
+
   private async extractText(file: Express.Multer.File): Promise<string> {
     if (!ACCEPTED_MIMETYPES.has(file.mimetype)) {
-      this.logger.warn(`Unsupported file type "${file.mimetype}" for "${file.originalname}"`);
+      this.logger.warn(`Unsupported file type "${file.mimetype}" for "${this.sanitizeFilename(file.originalname)}"`);
       return '';
     }
     try {
@@ -61,7 +67,7 @@ export class UploadService {
       // text/plain
       return file.buffer.toString('utf-8').trim();
     } catch (err) {
-      this.logger.warn(`Failed to parse "${file.originalname}": ${String(err)}`);
+      this.logger.warn(`Failed to parse "${this.sanitizeFilename(file.originalname)}": ${String(err)}`);
       return '';
     }
   }
