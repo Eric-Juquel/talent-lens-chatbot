@@ -12,6 +12,12 @@ const STEPS: { id: WizardStep; key: string }[] = [
   { id: 3, key: 'steps.chat' },
 ];
 
+function getStepClass(currentStep: WizardStep, stepId: WizardStep): string {
+  if (currentStep === stepId) return 'bg-primary text-primary-foreground shadow-md shadow-primary/30';
+  if (currentStep > stepId) return 'bg-primary/20 text-primary';
+  return 'bg-muted text-muted-foreground';
+}
+
 export function StepIndicator({ currentStep }: StepIndicatorProps) {
   const { t } = useTranslation();
 
@@ -23,11 +29,7 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
             <div
               className={cn(
                 'flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold transition-colors',
-                currentStep === step.id
-                  ? 'bg-primary text-primary-foreground shadow-md shadow-primary/30'
-                  : currentStep > step.id
-                    ? 'bg-primary/20 text-primary'
-                    : 'bg-muted text-muted-foreground',
+                getStepClass(currentStep, step.id),
               )}
               aria-current={currentStep === step.id ? 'step' : undefined}
             >

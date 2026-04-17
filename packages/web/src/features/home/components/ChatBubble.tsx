@@ -1,9 +1,21 @@
 import { memo } from 'react';
+import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { User, Bot } from 'lucide-react';
 import Markdown from 'react-markdown';
 import { cn } from '@/shared/lib/utils';
 import type { ChatMessage } from '@/api/model/upload';
+
+const markdownComponents = {
+  p: ({ children }: { children?: ReactNode }) => <p className='mb-2 last:mb-0'>{children}</p>,
+  ul: ({ children }: { children?: ReactNode }) => <ul className='mb-2 list-disc pl-4'>{children}</ul>,
+  ol: ({ children }: { children?: ReactNode }) => <ol className='mb-2 list-decimal pl-4'>{children}</ol>,
+  li: ({ children }: { children?: ReactNode }) => <li className='mb-0.5'>{children}</li>,
+  strong: ({ children }: { children?: ReactNode }) => <strong className='font-semibold'>{children}</strong>,
+  code: ({ children }: { children?: ReactNode }) => (
+    <code className='rounded bg-black/20 px-1 py-0.5 font-mono text-xs'>{children}</code>
+  ),
+};
 
 interface ChatBubbleProps {
   readonly message: ChatMessage;
@@ -48,16 +60,7 @@ export const ChatBubble = memo(function ChatBubble({ message, candidateName }: C
           ) : (
             <Markdown
               skipHtml={true}
-              components={{
-                p: ({ children }) => <p className='mb-2 last:mb-0'>{children}</p>,
-                ul: ({ children }) => <ul className='mb-2 list-disc pl-4'>{children}</ul>,
-                ol: ({ children }) => <ol className='mb-2 list-decimal pl-4'>{children}</ol>,
-                li: ({ children }) => <li className='mb-0.5'>{children}</li>,
-                strong: ({ children }) => <strong className='font-semibold'>{children}</strong>,
-                code: ({ children }) => (
-                  <code className='rounded bg-black/20 px-1 py-0.5 font-mono text-xs'>{children}</code>
-                ),
-              }}
+              components={markdownComponents}
             >
               {message.content}
             </Markdown>

@@ -13,7 +13,7 @@ export function Header() {
   const reset = useTalentStore((s) => s.reset);
   const [menuOpen, setMenuOpen] = useState(false);
   const burgerRef = useRef<HTMLButtonElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDialogElement>(null);
 
   const handleNewAnalysis = useCallback(() => {
     reset();
@@ -119,13 +119,12 @@ export function Header() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div
+        <dialog
           ref={menuRef}
           id='mobile-nav-menu'
-          role='dialog'
-          aria-modal='true'
+          open
           aria-label={t('nav.mobileMenuLabel')}
-          className='border-t border-border bg-background px-4 pb-4 pt-2 md:hidden'
+          className='m-0 w-full max-w-none border-0 border-t border-border bg-background px-4 pb-4 pt-2 md:hidden'
         >
           <button
             type='button'
@@ -156,7 +155,7 @@ export function Header() {
             )}
             {theme === 'dark' ? t('theme.toggleLight') : t('theme.toggleDark')}
           </button>
-        </div>
+        </dialog>
       )}
     </header>
   );

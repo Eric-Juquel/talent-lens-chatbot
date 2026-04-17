@@ -110,14 +110,14 @@ export default function HomePage() {
   const handleSeeSummary = useCallback(async () => {
     // Already pre-generated — navigate immediately
     if (summaryResult) {
-      void navigate('/summary');
+      navigate('/summary');
       return;
     }
     setSummaryLoading(true);
     try {
       const summary = await summaryService.generateSummary(buildContext(), i18n.language);
       setSummaryResult(summary);
-      void navigate('/summary');
+      navigate('/summary');
     } catch (err) {
       const msg = err instanceof ApiError ? err.message : t('errors.summary');
       toast.error(msg);
@@ -130,7 +130,7 @@ export default function HomePage() {
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
-        void handleSendMessage();
+        handleSendMessage();
       }
     },
     [handleSendMessage],
@@ -180,7 +180,7 @@ export default function HomePage() {
           </div>
 
           <Button
-            onClick={() => void handleAnalyze()}
+            onClick={handleAnalyze}
             disabled={!cvFile || uploading}
             size='lg'
             className='w-full'
@@ -261,9 +261,8 @@ export default function HomePage() {
                 <p className='text-sm text-muted-foreground'>{t('chat.subtitle')}</p>
               </div>
             ) : (
-              chatHistory.map((msg, i) => (
-                // biome-ignore lint/suspicious/noArrayIndexKey: messages are append-only
-                <ChatBubble key={i} message={msg} candidateName={summaryResult?.name || uploadResult?.candidateName} />
+              chatHistory.map((msg) => (
+                <ChatBubble key={msg.id} message={msg} candidateName={summaryResult?.name || uploadResult?.candidateName} />
               ))
             )}
             {chatLoading && (
@@ -286,7 +285,7 @@ export default function HomePage() {
               className='flex-1 resize-none'
             />
             <Button
-              onClick={() => void handleSendMessage()}
+              onClick={handleSendMessage}
               disabled={!message.trim() || chatLoading}
               size='icon'
               className='h-auto shrink-0 self-stretch'
@@ -298,7 +297,7 @@ export default function HomePage() {
 
           {/* See Summary */}
           <Button
-            onClick={() => void handleSeeSummary()}
+            onClick={handleSeeSummary}
             disabled={summaryLoading}
             variant='outline'
             className='w-full'

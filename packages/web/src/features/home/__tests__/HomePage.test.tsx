@@ -176,7 +176,7 @@ describe('HomePage — Step 3 (Chat)', () => {
     useTalentStore.setState({
       step: 3,
       uploadResult,
-      chatHistory: [{ role: 'assistant', content: 'Bonjour !' }],
+      chatHistory: [{ id: 'test-1', role: 'assistant', content: 'Bonjour !' }],
       summaryResult: null,
     });
   });
