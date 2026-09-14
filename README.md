@@ -6,7 +6,7 @@ AI-powered candidate profile analyzer for recruiters and HR teams. Upload a CV, 
 
 | Layer | Technology | Version |
 |---|---|---|
-| Monorepo | pnpm workspaces | 10.x |
+| Monorepo | pnpm workspaces | 11.x |
 | Backend | NestJS + TypeScript | 11.x / 5.x |
 | Frontend | React + Vite + TypeScript | 19.x / 8.x / 5.x |
 | Styling | Tailwind v4 + shadcn/ui | 4.x |
@@ -30,7 +30,7 @@ AI-powered candidate profile analyzer for recruiters and HR teams. Upload a CV, 
 ## Prerequisites
 
 - Node.js 20+
-- pnpm 10+
+- pnpm 11+
 - An OpenAI API key (or a local Ollama instance)
 
 ## Getting started
