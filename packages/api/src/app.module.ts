@@ -1,4 +1,5 @@
 import { ChatModule } from '@api/chat/chat.module';
+import { DEFAULT_OPENAI_MODEL } from '@api/common/constants';
 import { HealthModule } from '@api/health/health.module';
 import { SummaryModule } from '@api/summary/summary.module';
 import { UploadModule } from '@api/upload/upload.module';
@@ -19,7 +20,7 @@ import { ZodValidationPipe } from 'nestjs-zod';
         CORS_ORIGINS: Joi.string().default('http://localhost:5173'),
         OPENAI_API_KEY: Joi.string().required(),
         OPENAI_BASE_URL: Joi.string().optional(),
-        OPENAI_MODEL: Joi.string().default('gpt-5-mini'),
+        OPENAI_MODEL: Joi.string().default(DEFAULT_OPENAI_MODEL),
         THROTTLE_TTL: Joi.number().default(60000),
         THROTTLE_LIMIT: Joi.number().default(100),
       }),

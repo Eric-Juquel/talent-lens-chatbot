@@ -2,6 +2,7 @@ import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common
 // biome-ignore lint/style/useImportType: NestJS DI requires runtime class import
 import { ConfigService } from '@nestjs/config';
 import { jsonrepair } from 'jsonrepair';
+import { DEFAULT_OPENAI_MODEL } from '../common/constants';
 import OpenAI from 'openai';
 import type { SummaryRequest } from './dto/summary-request.dto';
 import { type SummaryResponse, summaryResponseSchema } from './dto/summary-response.dto';
@@ -52,7 +53,7 @@ export class SummaryService {
 
   constructor(private readonly config: ConfigService) {
     const baseURL = this.config.get<string>('OPENAI_BASE_URL');
-    this.model = this.config.get<string>('OPENAI_MODEL', 'gpt-5-mini');
+    this.model = this.config.get<string>('OPENAI_MODEL', DEFAULT_OPENAI_MODEL);
     this.openai = new OpenAI({
       apiKey: this.config.getOrThrow<string>('OPENAI_API_KEY'),
       ...(baseURL ? { baseURL } : {}),
