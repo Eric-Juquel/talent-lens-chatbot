@@ -28,6 +28,8 @@ RUN pnpm --filter talent-lens-api deploy --prod --legacy /deploy
 
 # ── Stage 3: runtime ────────────────────────────────────────────────────────
 FROM node:22-alpine
+# Pick up patched Alpine OS packages (e.g. util-linux/libuuid CVEs) not yet baked into the base image tag
+RUN apk update && apk upgrade --no-cache
 # Remove npm/npx — not needed at runtime, eliminates CVE-2026-33671 (picomatch ReDoS)
 RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
 WORKDIR /app
