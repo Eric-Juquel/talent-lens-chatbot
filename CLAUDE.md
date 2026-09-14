@@ -13,7 +13,7 @@ Outil pour recruteurs/RH permettant d'analyser un profil candidat à partir de s
 | Frontend | React 19 + Vite + TypeScript (`packages/web`) |
 | Client HTTP | Orval v8 (généré depuis Swagger NestJS) |
 | Styles | Tailwind v4 + shadcn/ui — thème Dark Premium (indigo/violet) |
-| IA | OpenAI SDK — `gpt-4o-mini` |
+| IA | OpenAI SDK — `gpt-5-mini` |
 | PDF parsing | `pdf-parse` (NestJS, côté serveur uniquement) |
 | i18n | `react-i18next` — FR/EN |
 | Routing | React Router v7 |

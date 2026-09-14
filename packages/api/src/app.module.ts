@@ -19,7 +19,7 @@ import { ZodValidationPipe } from 'nestjs-zod';
         CORS_ORIGINS: Joi.string().default('http://localhost:5173'),
         OPENAI_API_KEY: Joi.string().required(),
         OPENAI_BASE_URL: Joi.string().optional(),
-        OPENAI_MODEL: Joi.string().default('gpt-4o-mini'),
+        OPENAI_MODEL: Joi.string().default('gpt-5-mini'),
         THROTTLE_TTL: Joi.number().default(60000),
         THROTTLE_LIMIT: Joi.number().default(100),
       }),

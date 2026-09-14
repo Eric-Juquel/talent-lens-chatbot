@@ -52,7 +52,7 @@ export class SummaryService {
 
   constructor(private readonly config: ConfigService) {
     const baseURL = this.config.get<string>('OPENAI_BASE_URL');
-    this.model = this.config.get<string>('OPENAI_MODEL', 'gpt-4o-mini');
+    this.model = this.config.get<string>('OPENAI_MODEL', 'gpt-5-mini');
     this.openai = new OpenAI({
       apiKey: this.config.getOrThrow<string>('OPENAI_API_KEY'),
       ...(baseURL ? { baseURL } : {}),

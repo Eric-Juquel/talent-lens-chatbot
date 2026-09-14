@@ -10,7 +10,7 @@ AI-powered candidate profile analyzer for recruiters and HR teams. Upload a CV, 
 | Backend | NestJS + TypeScript | 11.x / 5.x |
 | Frontend | React + Vite + TypeScript | 19.x / 8.x / 5.x |
 | Styling | Tailwind v4 + shadcn/ui | 4.x |
-| AI | OpenAI SDK — `gpt-4o-mini` or Ollama | 6.x |
+| AI | OpenAI SDK — `gpt-5-mini` or Ollama | 6.x |
 | PDF parsing | pdf-parse | 2.x |
 | Validation | Zod + nestjs-zod | 4.x / 5.x |
 | HTTP client | Axios + Orval | 1.x / 8.x |
@@ -25,7 +25,7 @@ AI-powered candidate profile analyzer for recruiters and HR teams. Upload a CV, 
 - Detected links (GitHub, LinkedIn, portfolio)
 - AI chatbot to interrogate the candidate profile
 - FR / EN interface — AI content generated in the active language
-- Supports OpenAI (`gpt-4o-mini`) or a local Ollama model
+- Supports OpenAI (`gpt-5-mini`) or a local Ollama model
 
 ## Prerequisites
 
@@ -92,7 +92,7 @@ talent-lens/
 ```
 OPENAI_API_KEY=sk-...          # required for OpenAI
 OPENAI_BASE_URL=               # optional: set to Ollama URL (e.g. http://localhost:11434/v1)
-OPENAI_MODEL=gpt-4o-mini       # optional: override model name
+OPENAI_MODEL=gpt-5-mini        # optional: override model name
 PORT=3001
 NODE_ENV=development
 CORS_ORIGINS=http://localhost:5173

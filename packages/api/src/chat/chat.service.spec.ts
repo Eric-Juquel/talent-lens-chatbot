@@ -255,7 +255,7 @@ describe('ChatService', () => {
       expect(mockCreate.mock.calls[0][0].model).toBe('test-model');
     });
 
-    it('uses default gpt-4o-mini model when OPENAI_MODEL not set', async () => {
+    it('uses default gpt-5-mini model when OPENAI_MODEL not set', async () => {
       mockConfig.get.mockImplementation((key: string, def?: unknown) => def ?? undefined);
 
       const module = await Test.createTestingModule({
@@ -266,7 +266,7 @@ describe('ChatService', () => {
 
       await svc.chat(baseDto);
 
-      expect(mockCreate.mock.calls[0][0].model).toBe('gpt-4o-mini');
+      expect(mockCreate.mock.calls[0][0].model).toBe('gpt-5-mini');
     });
 
     it('passes baseURL to OpenAI when OPENAI_BASE_URL is set', async () => {
