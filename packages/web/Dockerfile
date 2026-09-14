@@ -21,6 +21,8 @@ RUN pnpm --filter talent-lens-web build
 
 # ── Stage 2: serve ──────────────────────────────────────────────────────────
 FROM nginx:alpine
+# Pick up patched Alpine OS packages (e.g. util-linux/libuuid CVEs) not yet baked into the base image tag
+RUN apk update && apk upgrade --no-cache
 COPY packages/web/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/packages/web/dist /usr/share/nginx/html
 EXPOSE 80
